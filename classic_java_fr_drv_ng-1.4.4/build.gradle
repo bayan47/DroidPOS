@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('classic_java_fr_drv_ng-1.4.4.jar'))
