@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Kassa_Settings">
+
+    <Button
+        android:id="@+id/opensession_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Открыть смену"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <Button
+        android:id="@+id/xprint_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Печать X-отчета"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <Button
+        android:id="@+id/closesession_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Закрыть смену"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <TextView
+        android:id="@+id/ErrorShelf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
