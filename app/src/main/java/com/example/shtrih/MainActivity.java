@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         int answer = Kassa.device.Connect();
         Kassa.device.Beep();
 
-        final Intent ToKassaSetting = new Intent(this,Kassa_Settings.class);
+        final Intent ToKassaSetting = new Intent(this,Kassa_SellUI.class);
 
         Button kassasettings_button = findViewById(R.id.kassasettings_button);
         View.OnClickListener kassaset = new View.OnClickListener() {

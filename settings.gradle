@@ -1,4 +1,3 @@
-include ':classic_java_fr_drv_ng-1.4.4'
 include ':android_util_fr_drv_ng-release'
 include ':app'
 rootProject.name = "Shtrih"
