@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/kassasettings_button"
@@ -13,4 +14,63 @@
         android:text="Кассовое устройство"
         tools:layout_editor_absoluteX="156dp"
         tools:layout_editor_absoluteY="654dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="198dp"
+            android:layout_height="wrap_content"
+            android:text="Статус подключения:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textStatusConnection"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/InputIpAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите IP адрес"
+        android:inputType="text"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/InputTCPPort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите TCP порт"
+        android:inputType="number"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/InputTimeout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите таймаут"
+        android:inputType="number"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/connect_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Подключить"
+        android:onClick="Connect_Button"/>
+
+    <Button
+        android:id="@+id/disconnect_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Отключить"
+        android:onClick="Disconnect_Button"/>
+
+
 </LinearLayout>

@@ -6,11 +6,11 @@ import java.math.RoundingMode;
 
 import ru.shtrih_m.fr_drv_ng.classic_interface.classic_interface;
 
-
 final public class Kassa  {
 
+
     public static classic_interface device = new classic_interface(); //Физическая касса
-    
+
     public static enum TaxTypes         //Перечисление типов НДС
     {
         WithoutNDS(0,"Без НДС"),NDS20(1,"НДС 20%"),NDS10(2,"НДС 10%"),NDS0(3,"НДС 0%"),WithoutNDS2(4,"Без НДС"),NDS20120(5, "НДС 20/120"),NDS10110(6, "НДС 10/110");
@@ -40,7 +40,6 @@ final public class Kassa  {
             pay_id = id;
             pay_name = name;
         }
-
         @Override
         public String toString()
         {
@@ -78,10 +77,9 @@ final public class Kassa  {
     public static PaymentItemType paymentItemType; //Признак предмета расчета
 
 
-    public static void OpenSession()           //Открыть смену на кассе
+    public static void OpenSession()           //Открыть смену на кассу
     {
         device.FNOpenSession();
-
     }
 
     public static void CloseSession()          //Закрыть смену на кассе
@@ -89,9 +87,26 @@ final public class Kassa  {
         device.FNCloseSession();
     }
 
-    public static void XPrint()                 //Печать X-отчета
+    public static void XPrint()
     {
         device.PrintReportWithoutCleaning();
+    }
+
+    public static void FrConnect(String address, int port, int timeout)            //Подключить кассу
+    {
+        Kassa.device.Set_ConnectionType(classic_interface.TConnectionType.Tcp);
+        Kassa.device.Set_UseIPAddress(true);
+        Kassa.device.Set_IPAddress(address);
+        Kassa.device.Set_TCPPort(port);
+        Kassa.device.Set_Timeout(timeout);
+        Kassa.device.Set_ProtocolType(0);
+        Kassa.device.Set_Password(30);
+    }
+
+    public static void FrDisconnect()   // Отключить кассу
+    {
+        Kassa.device.Disconnect();
+        int answer = Kassa.device.Connect();
     }
 
     public static void Sell()                   //Продажа

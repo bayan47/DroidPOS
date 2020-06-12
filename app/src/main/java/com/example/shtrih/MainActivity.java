@@ -9,11 +9,15 @@ import android.os.Bundle;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.content.Context;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.net.*;
 
 
@@ -29,15 +33,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Kassa.device.Set_ConnectionType(classic_interface.TConnectionType.Tcp);
-        Kassa.device.Set_UseIPAddress(true);
-        Kassa.device.Set_IPAddress("91.202.207.241");
-        Kassa.device.Set_TCPPort(8888);
-        Kassa.device.Set_Timeout(10000);
-        Kassa.device.Set_ProtocolType(0);
-        Kassa.device.Set_Password(30);
-        int answer = Kassa.device.Connect();
-        Kassa.device.Beep();
 
         final Intent ToKassaSetting = new Intent(this,Kassa_SellUI.class);
 
@@ -49,5 +44,58 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         kassasettings_button.setOnClickListener(kassaset);
+    }
+
+    public void Connect_Button(View view)
+    {
+        EditText ip = (EditText) findViewById(R.id.InputIpAddress);
+        String ipaddress = ip.getText().toString();
+
+        if(!ipaddress.isEmpty())
+        {
+            EditText tcp = (EditText) findViewById(R.id.InputTCPPort);
+            String temp = tcp.getText().toString();
+
+            if(!temp.isEmpty())
+            {
+                int tcpPort = Integer.parseInt(temp);
+
+                EditText timeout_temp_1 = (EditText) findViewById(R.id.InputTimeout);
+                String timeout_temp_2 = timeout_temp_1.getText().toString();
+
+                if(!timeout_temp_2.isEmpty())
+                {
+                    int timeout = Integer.parseInt(timeout_temp_2);
+
+                    Kassa.FrConnect(ipaddress, tcpPort, timeout);
+
+                    int answer = Kassa.device.Connect();
+                    if(answer == 0)
+                    {
+                        Kassa.device.Beep();
+                        TextView statusConnection = (TextView) findViewById(R.id.textStatusConnection);
+                        statusConnection.setText("Подключено");
+                    }
+                    else
+                    {
+                        TextView statusConnection = (TextView) findViewById(R.id.textStatusConnection);
+                        statusConnection.setText("Ошибка");
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+
+
+    public void Disconnect_Button(View view)
+    {
+        Kassa.FrDisconnect();
+
+        TextView statusConnection = (TextView) findViewById(R.id.textStatusConnection);
+        statusConnection.setText("Отключено");
     }
 }
