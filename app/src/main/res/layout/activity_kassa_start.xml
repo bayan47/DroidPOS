@@ -31,6 +31,12 @@
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="33dp" />
 
+    <Button
+        android:id="@+id/check_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Кассовые операции" />
+
     <TextView
         android:id="@+id/ErrorShelf"
         android:layout_width="match_parent"

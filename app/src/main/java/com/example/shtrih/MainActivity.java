@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        final Intent ToKassaSetting = new Intent(this,Kassa_SellUI.class);
+        final Intent ToKassaSetting = new Intent(this,Kassa_Settings.class);
 
         Button kassasettings_button = findViewById(R.id.kassasettings_button);
         View.OnClickListener kassaset = new View.OnClickListener() {
