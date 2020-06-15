@@ -69,12 +69,34 @@ final public class Kassa  {
         }
     }
 
+    public static enum CashOperationType
+    {
+        Prihod(1,"Приход"),VozvratPrihoda(2,"Возврат прихода"),Rashod(3, "Расход"),VozvratRashoda(4,"Возврат расхода");
+
+        int cash_operation_type_id;
+        String cash_operation_type_name;
+
+        CashOperationType(int id, String name)
+        {
+            cash_operation_type_id = id;
+            cash_operation_type_name = name;
+        }
+
+        @Override
+        public String toString()
+        {
+            super.toString();
+            return cash_operation_type_name;
+        }
+    }
+
     public static String goodName; //Название товара
     public static long price; //Цена товара
     public static double quantity; // Количество товара
     public static TaxTypes taxType; //Тип НДС
     public static PaymentTypes paymentType; //Признак способа расчета
     public static PaymentItemType paymentItemType; //Признак предмета расчета
+    public static CashOperationType cashOperationType; //Тип кассовой операции
 
 
     public static void OpenSession()           //Открыть смену на кассу
@@ -109,9 +131,9 @@ final public class Kassa  {
         int answer = Kassa.device.Connect();
     }
 
-    public static void Sell()                   //Продажа
+    public static void CashOperation()                   //Продажа
     {
-        device.Set_CheckType(1);           //Устанавливаю тип операции. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1ga8c8729c0e051e112febacd4f7f9ee91d
+        device.Set_CheckType(cashOperationType.cash_operation_type_id);           //Устанавливаю тип операции. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1ga8c8729c0e051e112febacd4f7f9ee91d
         device.Set_Price(price);
         device.Set_StringForPrinting(goodName);
         device.Set_Quantity(quantity);           //Установка количества товара к продаже

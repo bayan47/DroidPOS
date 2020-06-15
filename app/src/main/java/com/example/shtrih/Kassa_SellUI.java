@@ -25,11 +25,12 @@ public class Kassa_SellUI extends AppCompatActivity {
         final EditText good_quantity = findViewById(R.id.GoodQuantity);
         final EditText good_price = findViewById(R.id.GoodPrice);
 
-        Button sell_button = findViewById(R.id.sell_button);
+        final Button sell_button = findViewById(R.id.sell_button);
 
         Spinner nds_selector = (Spinner)findViewById(R.id.nds);
         Spinner pay_type_selector = (Spinner)findViewById(R.id.payment_type);
         Spinner pay_item_type_selector = (Spinner)findViewById(R.id.pay_item_type);
+        Spinner cash_operation_type_selector = (Spinner)findViewById(R.id.operation_type);
 
 
 
@@ -39,9 +40,10 @@ public class Kassa_SellUI extends AppCompatActivity {
                 Kassa.goodName = good_name.getText().toString();
                 Kassa.quantity = Double.parseDouble(good_quantity.getText().toString());
                 Kassa.price = Kassa.ParsePrice(good_price.getText().toString());
-                Kassa.Sell();
+                Kassa.CashOperation();
             }
         };
+
         sell_button.setOnClickListener(sell_button_listener);
 
         ArrayAdapter<Kassa.TaxTypes> nds_adapter = new ArrayAdapter<Kassa.TaxTypes>(this,android.R.layout.simple_spinner_item,Kassa.TaxTypes.values());
@@ -55,6 +57,11 @@ public class Kassa_SellUI extends AppCompatActivity {
         ArrayAdapter<Kassa.PaymentItemType> pay_item_type_adapter = new ArrayAdapter<Kassa.PaymentItemType>(this,android.R.layout.simple_spinner_item,Kassa.PaymentItemType.values());
         pay_item_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pay_item_type_selector.setAdapter(pay_item_type_adapter);
+
+        ArrayAdapter<Kassa.CashOperationType> cash_operation_type_adapter = new ArrayAdapter<Kassa.CashOperationType>(this,android.R.layout.simple_spinner_item,Kassa.CashOperationType.values());
+        cash_operation_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        cash_operation_type_selector.setAdapter(cash_operation_type_adapter);
+
 
         AdapterView.OnItemSelectedListener nds_selected = new AdapterView.OnItemSelectedListener()
         {
@@ -100,9 +107,23 @@ public class Kassa_SellUI extends AppCompatActivity {
             }
         };
 
+        AdapterView.OnItemSelectedListener cash_operation_type_selected = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                Kassa.cashOperationType = (Kassa.CashOperationType)parent.getItemAtPosition(position);
+                sell_button.setText(Kassa.cashOperationType.toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        };
+
         nds_selector.setOnItemSelectedListener(nds_selected);
         pay_type_selector.setOnItemSelectedListener(pay_type_selected);
         pay_item_type_selector.setOnItemSelectedListener(pay_item_type_selected);
+
 
 
 
