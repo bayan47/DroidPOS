@@ -1,6 +1,6 @@
 package com.example.shtrih;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.AdapterView;
@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 public class Kassa_SellUI extends AppCompatActivity {
 
@@ -25,7 +24,7 @@ public class Kassa_SellUI extends AppCompatActivity {
         final EditText good_quantity = findViewById(R.id.GoodQuantity);
         final EditText good_price = findViewById(R.id.GoodPrice);
 
-        final Button sell_button = findViewById(R.id.sell_button);
+        final Button sell_button = findViewById(R.id.add_goods);
 
         Spinner nds_selector = (Spinner)findViewById(R.id.nds);
         Spinner pay_type_selector = (Spinner)findViewById(R.id.payment_type);
@@ -81,7 +80,7 @@ public class Kassa_SellUI extends AppCompatActivity {
 
         AdapterView.OnItemSelectedListener pay_type_selected = new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Kassa.paymentType = (Kassa.PaymentTypes)parent.getItemAtPosition(position);
             }
 
@@ -109,7 +108,7 @@ public class Kassa_SellUI extends AppCompatActivity {
 
         AdapterView.OnItemSelectedListener cash_operation_type_selected = new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Kassa.cashOperationType = (Kassa.CashOperationType)parent.getItemAtPosition(position);
                 sell_button.setText(Kassa.cashOperationType.toString());
             }
@@ -123,6 +122,7 @@ public class Kassa_SellUI extends AppCompatActivity {
         nds_selector.setOnItemSelectedListener(nds_selected);
         pay_type_selector.setOnItemSelectedListener(pay_type_selected);
         pay_item_type_selector.setOnItemSelectedListener(pay_item_type_selected);
+        cash_operation_type_selector.setOnItemSelectedListener(cash_operation_type_selected);
 
 
 

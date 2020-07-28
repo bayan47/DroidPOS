@@ -1,38 +1,50 @@
 package com.example.shtrih;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Build;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.content.Context;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.net.*;
-
-
-
-import ru.shtrih_m.fr_drv_ng.classic_interface.classic_interface;
 //import ru.shtrih_m.fr_drv_ng.android_util.BuildConfig;
 
 public class MainActivity extends AppCompatActivity {
     // Used to load the 'native-lib' library on application startup.
+
+    public static String ipaddress;
+    public static int port;
+    public static int timeout;
+    public static boolean created_table;
+    public static SQLiteDatabase db;
+    public static EditText ip ;
+    public static EditText tcp;
+    public static EditText timeout_temp_1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ip = (EditText) findViewById(R.id.InputIpAddress);
+        tcp = (EditText) findViewById(R.id.InputTCPPort);
+        timeout_temp_1 = (EditText) findViewById(R.id.InputTimeout);
+
+        db = getBaseContext().openOrCreateDatabase("ps34.db", MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS conn_settings (id INTEGER, ip TEXT, port INTEGER, timeout INTEGER)");
+        Cursor query = db.rawQuery("SELECT * FROM conn_settings;", null);
+        if(query.moveToFirst()){
+
+            ipaddress = query.getString(1);
+            port = query.getInt(2);
+            timeout = query.getInt(3);
+            created_table=true;
+            ip.setText(ipaddress);
+            tcp.setText(String.valueOf(port));
+            timeout_temp_1.setText(String.valueOf(timeout));
 
 
+        }
 
         final Intent ToKassaSetting = new Intent(this,Kassa_Settings.class);
 
@@ -48,26 +60,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void Connect_Button(View view)
     {
-        EditText ip = (EditText) findViewById(R.id.InputIpAddress);
-        String ipaddress = ip.getText().toString();
+
+        ipaddress = ip.getText().toString();
 
         if(!ipaddress.isEmpty())
         {
-            EditText tcp = (EditText) findViewById(R.id.InputTCPPort);
+
             String temp = tcp.getText().toString();
 
             if(!temp.isEmpty())
             {
-                int tcpPort = Integer.parseInt(temp);
+                port = Integer.parseInt(temp);
 
-                EditText timeout_temp_1 = (EditText) findViewById(R.id.InputTimeout);
+
                 String timeout_temp_2 = timeout_temp_1.getText().toString();
 
                 if(!timeout_temp_2.isEmpty())
                 {
-                    int timeout = Integer.parseInt(timeout_temp_2);
+                    timeout = Integer.parseInt(timeout_temp_2);
 
-                    Kassa.FrConnect(ipaddress, tcpPort, timeout);
+                    Kassa.FrConnect(ipaddress, port, timeout);
 
                     int answer = Kassa.device.Connect();
                     if(answer == 0)
@@ -75,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
                         Kassa.device.Beep();
                         TextView statusConnection = (TextView) findViewById(R.id.textStatusConnection);
                         statusConnection.setText("Подключено");
+
+                        if(created_table==false)
+                        {
+                            db.execSQL("INSERT INTO conn_settings VALUES(0,'"+ipaddress+"',"+port+","+timeout+")");
+                        }
+                        else
+                            db.execSQL("UPDATE conn_settings SET ip = '"+ipaddress+"',port = "+port+", timeout = "+timeout+" WHERE id = 0;");
                     }
                     else
                     {
