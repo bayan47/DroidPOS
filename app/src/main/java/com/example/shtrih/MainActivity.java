@@ -1,5 +1,6 @@
 package com.example.shtrih;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,15 +23,20 @@ public class MainActivity extends AppCompatActivity {
     public static EditText ip ;
     public static EditText tcp;
     public static EditText timeout_temp_1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         ip = (EditText) findViewById(R.id.InputIpAddress);
         tcp = (EditText) findViewById(R.id.InputTCPPort);
         timeout_temp_1 = (EditText) findViewById(R.id.InputTimeout);
 
-        db = getBaseContext().openOrCreateDatabase("ps34.db", MODE_PRIVATE, null);
+        DBHelper.OpenOrCreateDB(this);
+        db = DBHelper.DataBase;
         db.execSQL("CREATE TABLE IF NOT EXISTS conn_settings (id INTEGER, ip TEXT, port INTEGER, timeout INTEGER)");
         Cursor query = db.rawQuery("SELECT * FROM conn_settings;", null);
         if(query.moveToFirst()){
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
 
         final Intent ToKassaSetting = new Intent(this,Kassa_Settings.class);
 
@@ -116,5 +123,10 @@ public class MainActivity extends AppCompatActivity {
 
         TextView statusConnection = (TextView) findViewById(R.id.textStatusConnection);
         statusConnection.setText("Отключено");
+    }
+
+    public String getDbPath(Context context, String YourDbName)
+    {
+        return context.getDatabasePath(YourDbName).getAbsolutePath();
     }
 }

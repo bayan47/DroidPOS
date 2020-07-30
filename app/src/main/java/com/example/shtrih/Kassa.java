@@ -27,6 +27,7 @@ final public class Kassa  {
             super.toString();
             return nds_name;
         }
+
     }
 
     public static enum PaymentTypes     //Перечисление признаков способов расчета
@@ -88,6 +89,9 @@ final public class Kassa  {
             super.toString();
             return cash_operation_type_name;
         }
+
+
+
     }
 
     public static String goodName; //Название товара
@@ -155,4 +159,5 @@ final public class Kassa  {
         double input_price = bd.doubleValue()*100;
         return Double.valueOf(input_price).longValue();
     }
+
 }

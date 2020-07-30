@@ -120,8 +120,8 @@ public class Kassa_SellUI extends AppCompatActivity {
         };
 
         nds_selector.setOnItemSelectedListener(nds_selected);
-        pay_type_selector.setOnItemSelectedListener(pay_type_selected);
         pay_item_type_selector.setOnItemSelectedListener(pay_item_type_selected);
+        pay_type_selector.setOnItemSelectedListener(pay_type_selected);
         cash_operation_type_selector.setOnItemSelectedListener(cash_operation_type_selected);
 
 

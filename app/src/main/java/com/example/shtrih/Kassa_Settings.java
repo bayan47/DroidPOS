@@ -15,11 +15,13 @@ public class Kassa_Settings extends AppCompatActivity {
         setContentView(R.layout.activity_kassa_start);
 
         final Intent goto_check = new Intent(this,Kassa_SellUI.class);
+        final Intent goto_goods = new Intent (this,GoodsList.class);
 
         Button open_button = findViewById(R.id.opensession_button);
         Button close_button = findViewById(R.id.closesession_button);
         Button xprint_button = findViewById(R.id.xprint_button);
         Button check_button = findViewById(R.id.check_button);
+        Button goods_button = findViewById(R.id.goods_button);
 
         View.OnClickListener open_listener = new View.OnClickListener() {
             @Override
@@ -45,10 +47,17 @@ public class Kassa_Settings extends AppCompatActivity {
                  startActivity(goto_check);
             }
         };
+        View.OnClickListener goods_button_listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(goto_goods);
+            }
+        };
 
         open_button.setOnClickListener(open_listener);
         close_button.setOnClickListener(close_listener);
         xprint_button.setOnClickListener(xprint_listener);
         check_button.setOnClickListener(check_button_listener);
+        goods_button.setOnClickListener(goods_button_listener);
     }
 }
