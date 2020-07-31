@@ -1,5 +1,6 @@
 package com.example.shtrih;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,9 @@ public class GoodsList extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_list);
+
+        byte action_type = getIntent().getExtras().getByte("action type"); //0-Добавление нового товара, 1-Добавление товара в лист продажи
+
         final Intent goto_goodsadd = new Intent(this,GoodsAdd.class);
 
         ImageButton goodaddactivity_button = findViewById(R.id.goodaddactivity_button);
@@ -50,10 +54,22 @@ public class GoodsList extends AppCompatActivity {
         goodaddactivity_button.setOnClickListener(good_add_listener);
 
 
-        goods_list.setAdapter(new GoodsListAdapted(this,goods));
-        Toast.makeText(this,String.valueOf(goods.size()),Toast.LENGTH_LONG).show();
+        FillGoodsList(this,goods,goods_list,R.layout.goods_list_layout);
+
 
     }
 
+
+    public static void FillGoodsList(Context context,List<Good> goods_list, ListView listView,int layout)
+    {
+        listView.setAdapter(new GoodsListAdapted(context,goods_list,layout));
+    }
+
+    public static View.OnClickListener setClickListener(byte action_type)
+    {
+        View.OnClickListener listener = null ;
+
+        return listener;
+    }
 
 }

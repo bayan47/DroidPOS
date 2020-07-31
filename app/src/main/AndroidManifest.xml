@@ -19,7 +19,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GoodsAdd"></activity>
+        <activity
+            android:name=".FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen"
+            android:theme="@style/FullscreenTheme"></activity>
+        <activity android:name=".Cashier_RMK" />
+        <activity android:name=".GoodsAdd" />
         <activity android:name=".GoodsList" />
         <activity android:name=".Kassa_SellUI" />
         <activity android:name=".Kassa_Settings" />

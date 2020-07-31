@@ -14,7 +14,7 @@ public class Kassa_Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kassa_start);
 
-        final Intent goto_check = new Intent(this,Kassa_SellUI.class);
+        final Intent goto_check = new Intent(this,Cashier_RMK.class);
         final Intent goto_goods = new Intent (this,GoodsList.class);
 
         Button open_button = findViewById(R.id.opensession_button);
