@@ -5,11 +5,11 @@ android {
     buildToolsVersion '27.0.1'
 
     defaultConfig {
-        applicationId "com.example.shtrih"
-        minSdkVersion 19
+        applicationId 'com.example.ps'
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName '1.1'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {

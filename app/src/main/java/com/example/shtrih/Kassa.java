@@ -3,6 +3,7 @@ package com.example.shtrih;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 
 import ru.shtrih_m.fr_drv_ng.classic_interface.classic_interface;
 
@@ -51,6 +52,7 @@ final public class Kassa  {
 
     public static enum PaymentItemType
     {
+
         Tovar(1,"Товар"),AkcizTovar(2,"Подакцизный товар"),Rabota(3,"Работа"),Usluga(4,"Услуга"),StavkaAzart(5,"Ставка азартной игры"),IncomeAzart(6,"Выигрыш азартной игры"),LotBilet(7,"Лотерейный билет"),IncomeLot(8,"Выигрыш лотереи"),RID(9,"Предоставление РИД"),Platezh(10,"Платеж"),IncomeAgent(11,"Агентское вознаграждение"),SostavPayItemType(12,"Составной предмет расчета"),AnotherpayItemType(13,"Иной предмет расчета");
 
         int pay_item_type_id;
@@ -137,6 +139,7 @@ final public class Kassa  {
 
     public static void CashOperation()                   //Продажа
     {
+
         device.Set_CheckType(cashOperationType.cash_operation_type_id);           //Устанавливаю тип операции. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1ga8c8729c0e051e112febacd4f7f9ee91d
         device.Set_Price(price);
         device.Set_StringForPrinting(goodName);
@@ -149,6 +152,28 @@ final public class Kassa  {
         device.Set_PaymentTypeSign(paymentType.pay_id); //Установка признака расчета
         device.Set_PaymentItemSign(paymentItemType.pay_item_type_id); //Установка признака предмета расчета
         device.FNOperation();
+        device.FNCloseCheckEx();
+    }
+
+    public static void CashOperation2(ArrayList<Good> good_list)                   //Продажа
+    {
+        long Summ1=0;
+        for (Good good:good_list)
+        {
+            device.Set_CheckType(CashOperationType.Prihod.cash_operation_type_id);           //Устанавливаю тип операции. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1ga8c8729c0e051e112febacd4f7f9ee91d
+            device.Set_Price(good.price);
+            device.Set_StringForPrinting(good.name);
+            device.Set_Quantity(1);           //Установка количества товара к продаже
+            device.Set_TaxValue1Enabled(false);      //Установка самостоятельного расчета суммы налога. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1gab43c70068f2161777d97b26b7b586c52
+            Summ1 = Summ1+ device.Get_Price()*Double.valueOf(device.Get_Quantity()).longValue();
+            device.Set_Summ1Enabled(false);   //Установка параметра Summ1. (Нихрена не понятно для чего, но когда отключен сумма считается - количество товара * чек.
+            device.Set_Tax1(good.nds.nds_id);        //Установка выбранного НДС
+            device.Set_Department(1);         //Установка режима свободной продажи - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1ga25e8f3455a02458e60cbd624000c751b
+            device.Set_PaymentTypeSign(PaymentTypes.FullRashet.pay_id); //Установка признака расчета
+            device.Set_PaymentItemSign(good.type.pay_item_type_id); //Установка признака предмета расчета
+            device.FNOperation();
+        }
+        device.Set_Summ1(Summ1);
         device.FNCloseCheckEx();
     }
 

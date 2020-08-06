@@ -1,5 +1,6 @@
 package com.example.shtrih;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -30,6 +31,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.LOLLIPOP){
+            System.load("/data/data/"+getPackageName()+"/lib/libc++_shared.so");
+            System.load("/data/data/"+getPackageName()+"/lib/libcppbase_fr_drv_ng.so");
+            System.load("/data/data/"+getPackageName()+"/lib/libclassic_fr_drv_ng.so");
+        } else{
+            // do something for phones running an SDK before lollipop
+        }
+
+
+
+        DBHelper.app_name = getResources().getString(R.string.app_name);
 
         ip = (EditText) findViewById(R.id.InputIpAddress);
         tcp = (EditText) findViewById(R.id.InputTCPPort);
@@ -94,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         Kassa.device.Beep();
                         TextView statusConnection = (TextView) findViewById(R.id.textStatusConnection);
                         statusConnection.setText("Подключено");
+                        Notifications.MakeNotification(getApplicationContext());
 
                         if(created_table==false)
                         {

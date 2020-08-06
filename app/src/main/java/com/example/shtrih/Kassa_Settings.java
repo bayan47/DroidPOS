@@ -16,6 +16,8 @@ public class Kassa_Settings extends AppCompatActivity {
 
         final Intent goto_check = new Intent(this,Cashier_RMK.class);
         final Intent goto_goods = new Intent (this,GoodsList.class);
+        goto_goods.putExtra("action type",(byte)0);
+
 
         Button open_button = findViewById(R.id.opensession_button);
         Button close_button = findViewById(R.id.closesession_button);
