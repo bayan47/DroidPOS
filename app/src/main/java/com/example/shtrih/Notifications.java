@@ -18,7 +18,6 @@ final public class Notifications {
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle("Title")
-
                         .setContentText("Notification text");
 
         Notification notification = builder.build();
