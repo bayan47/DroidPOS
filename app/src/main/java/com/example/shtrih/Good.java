@@ -8,6 +8,7 @@ public class Good implements Serializable {
     public long price; // цена товара в копейках
     public Kassa.PaymentItemType type;
     public Kassa.TaxTypes nds;
+    public int isFreePrice; // 0 - жесткая цена, 1 - мягкая цена
     public int id;
 
     public Good()
@@ -15,13 +16,14 @@ public class Good implements Serializable {
 
     }
 
-    public Good (int ID, String Name,long Price,Kassa.TaxTypes NDS, Kassa.PaymentItemType Type)
+    public Good (int ID, String Name,long Price,Kassa.TaxTypes NDS, Kassa.PaymentItemType Type, int FreePrice)
     {
         name = Name;
         price = Price;
         type = Type;
         nds = NDS;
         id = ID;
+        isFreePrice = FreePrice;
     }
 
      public static Kassa.TaxTypes getNDS(int id)

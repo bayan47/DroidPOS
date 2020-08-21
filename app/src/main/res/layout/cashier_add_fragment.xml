@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ФИО кассира" />
+
+    <EditText
+        android:id="@+id/FIOCashier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="ФИО кассира"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ИНН" />
+
+    <EditText
+        android:id="@+id/INNCashier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="ИНН кассира"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Пароль" />
+
+    <EditText
+        android:id="@+id/CashierPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberPassword" />
+
+    <Button
+        android:id="@+id/AddCashier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сохранить" />
+
+</LinearLayout>

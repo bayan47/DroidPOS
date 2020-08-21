@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_cashier_logon"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.shtrih.Cashier_Logon">
@@ -13,155 +14,26 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button14"
+            android:id="@+id/add_cashier_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:text="Добавить кассира" />
 
         <ListView
+            android:id="@+id/Cashiers_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/right_place"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/cashier_pass"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="false"
-                android:editable="false"
-                android:ems="10"
-                android:focusable="false"
-                android:inputType="numberPassword"
-                android:singleLine="true" />
-
-            <Button
-                android:id="@+id/delete_char"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Удалить" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/num_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="1" />
-
-            <Button
-                android:id="@+id/num_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2" />
-
-            <Button
-                android:id="@+id/num_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="3" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/num_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="4" />
-
-            <Button
-                android:id="@+id/num_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="5" />
-
-            <Button
-                android:id="@+id/num_6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="6" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/num_7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="7" />
-
-            <Button
-                android:id="@+id/num_8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="8" />
-
-            <Button
-                android:id="@+id/num_9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="9" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/num_0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="0" />
-
-            <Button
-                android:id="@+id/accept_pass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Принять" />
-        </LinearLayout>
 
     </LinearLayout>
 

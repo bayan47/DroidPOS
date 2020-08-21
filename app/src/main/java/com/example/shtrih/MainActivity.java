@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 //import ru.shtrih_m.fr_drv_ng.android_util.BuildConfig;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,13 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.LOLLIPOP){
-            System.load("/data/data/"+getPackageName()+"/lib/libc++_shared.so");
-            System.load("/data/data/"+getPackageName()+"/lib/libcppbase_fr_drv_ng.so");
-            System.load("/data/data/"+getPackageName()+"/lib/libclassic_fr_drv_ng.so");
-        } else{
-            // do something for phones running an SDK before lollipop
-        }
+
 
 
 
@@ -48,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         tcp = (EditText) findViewById(R.id.InputTCPPort);
         timeout_temp_1 = (EditText) findViewById(R.id.InputTimeout);
 
-        DBHelper.OpenOrCreateDB(this);
+
         db = DBHelper.DataBase;
         db.execSQL("CREATE TABLE IF NOT EXISTS conn_settings (id INTEGER, ip TEXT, port INTEGER, timeout INTEGER)");
         Cursor query = db.rawQuery("SELECT * FROM conn_settings;", null);
@@ -107,7 +102,14 @@ public class MainActivity extends AppCompatActivity {
                         Kassa.device.Beep();
                         TextView statusConnection = (TextView) findViewById(R.id.textStatusConnection);
                         statusConnection.setText("Подключено");
-                        Notifications.MakeNotification(getApplicationContext());
+
+                        Kassa.device.Set_TableNumber(2);
+                        Kassa.device.Set_RowNumber(30);
+                        Kassa.device.Set_FieldNumber(2);
+                        Kassa.device.Set_ValueOfFieldString(Selected_Cashier.selected_cashier.name);
+                        Kassa.ErrorCode=Kassa.device.WriteTable();
+                        Kassa.FlushTableParameters();
+                        Notifications.MakeNotification(getApplicationContext(),Kassa.device.Get_ResultCodeDescription());
 
                         if(created_table==false)
                         {
@@ -129,6 +131,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    public void MakeToast(Context context)
+    {
+        Toast.makeText(context,"herewego",Toast.LENGTH_LONG).show();
+    }
 
 
     public void Disconnect_Button(View view)

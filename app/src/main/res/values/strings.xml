@@ -3,4 +3,6 @@
     <string name="title_activity_fullscreen" translatable="false">FullscreenActivity</string>
     <string name="dummy_button" translatable="false">Dummy Button</string>
     <string name="dummy_content" translatable="false">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

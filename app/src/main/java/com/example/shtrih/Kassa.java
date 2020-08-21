@@ -104,6 +104,15 @@ final public class Kassa  {
     public static PaymentItemType paymentItemType; //Признак предмета расчета
     public static CashOperationType cashOperationType; //Тип кассовой операции
 
+    public static int ErrorCode; //код ошибки
+
+
+    public static void FlushTableParameters()
+    {
+        Kassa.device.Set_TableNumber(0);
+        Kassa.device.Set_RowNumber(0);
+        Kassa.device.Set_FieldNumber(0);
+    }
 
     public static void OpenSession()           //Открыть смену на кассу
     {
@@ -139,7 +148,6 @@ final public class Kassa  {
 
     public static void CashOperation()                   //Продажа
     {
-
         device.Set_CheckType(cashOperationType.cash_operation_type_id);           //Устанавливаю тип операции. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1ga8c8729c0e051e112febacd4f7f9ee91d
         device.Set_Price(price);
         device.Set_StringForPrinting(goodName);

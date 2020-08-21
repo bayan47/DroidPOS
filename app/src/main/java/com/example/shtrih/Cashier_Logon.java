@@ -1,18 +1,22 @@
 package com.example.shtrih;
 
-import android.graphics.Point;
+import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cashier_Logon extends AppCompatActivity {
 
@@ -22,115 +26,72 @@ public class Cashier_Logon extends AppCompatActivity {
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getSupportActionBar().hide();
+        MultiApiHelper.Package_name = getPackageName();
+        MultiApiHelper.RunOnStartup();
 
+        DBHelper.OpenOrCreateDB(this);
+        DBHelper.DataBase.execSQL("CREATE TABLE IF NOT EXISTS cashiers (id INTEGER PRIMARY KEY, cashier_FIO TEXT, cashier_INN TEXT, cashier_pass TEXT)");
 
         setContentView(R.layout.activity_cashier__logon);
 
 
-        DisplayMetrics metrics = this.getResources().getDisplayMetrics();
-        int width = metrics.widthPixels;
-        int height = metrics.heightPixels;
 
-        final EditText pass_text = (EditText) findViewById(R.id.cashier_pass);
-        Button num_button1 = (Button) findViewById(R.id.num_1);
-        Button num_button2 = (Button) findViewById(R.id.num_2);
-        Button num_button3 = (Button) findViewById(R.id.num_3);
-        Button num_button4 = (Button) findViewById(R.id.num_4);
-        Button num_button5 = (Button) findViewById(R.id.num_5);
-        Button num_button6 = (Button) findViewById(R.id.num_6);
-        Button num_button7 = (Button) findViewById(R.id.num_7);
-        Button num_button8 = (Button) findViewById(R.id.num_8);
-        Button num_button9 = (Button) findViewById(R.id.num_9);
-        Button num_button0 = (Button) findViewById(R.id.num_0);
-        Button accept_pass = (Button) findViewById(R.id.accept_pass);
-        Button delete_char = (Button) findViewById(R.id.delete_char);
 
-        ArrayList<Button> buttons = new ArrayList<Button>();
-        buttons.add(num_button0);
-        buttons.add(num_button1);
-        buttons.add(num_button2);
-        buttons.add(num_button3);
-        buttons.add(num_button4);
-        buttons.add(num_button5);
-        buttons.add(num_button6);
-        buttons.add(num_button7);
-        buttons.add(num_button8);
-        buttons.add(num_button9);
-        buttons.add(delete_char);
-        buttons.add(accept_pass);
 
-        for (Button button : buttons) {
-            button.setHeight(height / 5);
-        }
 
+        Button add_cashier = (Button) findViewById(R.id.add_cashier_button);
+
+
+
+            View.OnClickListener but_add_cashier_listener = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LinearLayout right_place = (LinearLayout) findViewById(R.id.right_place);
+                    right_place.removeAllViews();
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.right_place, new Cashier_Add_Fragment()).commit();
+                }
+            };
+
+
+
+
+        add_cashier.setOnClickListener(but_add_cashier_listener);
+
+        final ListView cashiers_list = (ListView) findViewById(R.id.Cashiers_list);
+
+        cashiers_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                LinearLayout right_place = (LinearLayout) findViewById(R.id.right_place);
+                right_place.removeAllViews();
+                getSupportFragmentManager().beginTransaction().add(R.id.right_place,new Cashier_NumPad_Fragment()).commit();
+                Cashier cashier_selected = (Cashier) cashiers_list.getItemAtPosition(i);
+                Selected_Cashier.selected_cashier_pass = cashier_selected.password;
+
+                Selected_Cashier.selected_cashier = (Cashier) cashiers_list.getItemAtPosition(i);
+                view.setBackgroundColor(Color.rgb(205,237,253));
+            }
+        });
+
+        ArrayList<Cashier> cashiers = new ArrayList<>();
+
+        Cursor query = DBHelper.DataBase.rawQuery("SELECT * FROM cashiers;", null);
+        if(query.moveToFirst())
         {
-            View.OnClickListener but1_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pass_text.setText(pass_text.getText().toString() + "1");
-                }
-            };
-            View.OnClickListener but2_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pass_text.setText(pass_text.getText().toString()+"2");
-                }
-            };
-            View.OnClickListener but3_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pass_text.setText(pass_text.getText().toString()+"3");
-                }
-            };
-            View.OnClickListener but4_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pass_text.setText(pass_text.getText().toString()+"4");
-                }
-            };
-            View.OnClickListener but5_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pass_text.setText(pass_text.getText().toString()+"5");
-                }
-            };
-            View.OnClickListener but6_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pass_text.setText(pass_text.getText().toString()+"6");
-                }
-            };
-            View.OnClickListener but7_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pass_text.setText(pass_text.getText().toString()+"7");
-                }
-            };
-            View.OnClickListener but8_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pass_text.setText(pass_text.getText().toString()+"8");
-                }
-            };
-            View.OnClickListener but9_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pass_text.setText(pass_text.getText().toString()+"9");
-                }
-            };
-            View.OnClickListener but0_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pass_text.setText(pass_text.getText().toString()+"0");
-                }
-            };
-            View.OnClickListener butrem_listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //pass_text.setText(String.pass_text.getText().toString());
-                }
-            };
+
+            do {
+                int cashier_id = query.getInt(0);
+                String cashier_FIO = query.getString(1);
+                String cashier_INN = query.getString(2);
+                String cashier_pass = query.getString(3);
+                cashiers.add(new Cashier(cashier_id,cashier_FIO,cashier_INN,cashier_pass));
+            }
+            while (query.moveToNext());
         }
 
+
+        ArrayAdapter<Cashier> cashiers_list_adapter = new ArrayAdapter<Cashier>(this,android.R.layout.simple_list_item_1,cashiers);
+        cashiers_list.setAdapter(cashiers_list_adapter);
     }
 }

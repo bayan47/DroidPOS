@@ -12,13 +12,13 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 final public class Notifications {
 
-    public static void MakeNotification(Context context)
+    public static void MakeNotification(Context context,String message)
     {
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("Title")
-                        .setContentText("Notification text");
+                        .setContentTitle("ПриборКасса")
+                        .setContentText(message);
 
         Notification notification = builder.build();
 
