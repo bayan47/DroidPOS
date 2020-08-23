@@ -3,30 +3,21 @@ package com.example.shtrih;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class GoodsList extends AppCompatActivity {
 
-    ArrayList<Good> goods_to_sell_list = new ArrayList<Good>();
 
+    ListView goods_list;
+    List<Good> goods;
     Intent goto_goodsadd ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +52,7 @@ public class GoodsList extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    goto_cashier.putExtra("goods_to_sell_list", goods_to_sell_list);
+                    goto_cashier.putExtra("goods_to_sell_list", Kassa.goods_to_sell_list);
                     startActivity(goto_cashier);
                 }
             };
@@ -69,18 +60,18 @@ public class GoodsList extends AppCompatActivity {
         }
 
 
-        DBHelper.DataBase.execSQL("CREATE TABLE IF NOT EXISTS goods (id INTEGER PRIMARY KEY, good_name TEXT, good_price INTEGER, good_nds INTEGER, good_pay_item_type INTEGER)");
-        List<Good> goods = new ArrayList<Good>();
+        DBHelper.DataBase.execSQL("CREATE TABLE IF NOT EXISTS goods (id INTEGER PRIMARY KEY, good_name TEXT, good_price INTEGER, good_nds INTEGER, good_pay_item_type INTEGER, good_free_price INTEGER)");
+        goods = new ArrayList<Good>();
         Cursor query = DBHelper.DataBase.rawQuery("SELECT * FROM goods;", null);
         if (query.moveToFirst()) {
             do {
-                Good new_good = new Good(query.getInt(0), query.getString(1), query.getLong(2), Good.getNDS(query.getInt(3)), Good.getpaytype(query.getInt(4)));
+                Good new_good = new Good(query.getInt(0), query.getString(1), query.getLong(2), Good.getNDS(query.getInt(3)), Good.getpaytype(query.getInt(4)),query.getInt(5));
                 goods.add(new_good);
             }
             while (query.moveToNext());
         }
 
-        ListView goods_list = findViewById(R.id.ListView);
+         goods_list = findViewById(R.id.ListView);
 
 
         goods_list.setOnItemClickListener(setClickListener(action_type));
@@ -116,12 +107,28 @@ public class GoodsList extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Good test_good = (Good) adapterView.getItemAtPosition(i);
-                    goods_to_sell_list.add(test_good);
+
+
+                    showDialog(findViewById(R.id.goodaddactivity_button).getRootView(),test_good.name, test_good.price,test_good);
+
+
 
                 }
             };
         }
         return listener;
+    }
+
+    public void showDialog(View v, String good_name, long price,Good good) {
+
+        Good_Add_Dialog dialog = new Good_Add_Dialog();
+        dialog.header_text = good_name;
+        dialog.price = price;
+        dialog.good = good;
+        dialog.adapted = (GoodsListAdapted)goods_list.getAdapter();
+        dialog.goods_to_check = Kassa.goods_to_sell_list;
+        dialog.show(getSupportFragmentManager(), "custom");
+
     }
 
 

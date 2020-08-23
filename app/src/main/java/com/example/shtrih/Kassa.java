@@ -11,6 +11,7 @@ final public class Kassa  {
 
 
     public static classic_interface device = new classic_interface(); //Физическая касса
+    public static ArrayList<Good> goods_to_sell_list = new ArrayList<Good>();
 
     public static enum TaxTypes         //Перечисление типов НДС
     {
@@ -168,10 +169,11 @@ final public class Kassa  {
         long Summ1=0;
         for (Good good:good_list)
         {
+            quantity = good.count;
             device.Set_CheckType(CashOperationType.Prihod.cash_operation_type_id);           //Устанавливаю тип операции. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1ga8c8729c0e051e112febacd4f7f9ee91d
             device.Set_Price(good.price);
             device.Set_StringForPrinting(good.name);
-            device.Set_Quantity(1);           //Установка количества товара к продаже
+            device.Set_Quantity(quantity);           //Установка количества товара к продаже
             device.Set_TaxValue1Enabled(false);      //Установка самостоятельного расчета суммы налога. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1gab43c70068f2161777d97b26b7b586c52
             Summ1 = Summ1+ device.Get_Price()*Double.valueOf(device.Get_Quantity()).longValue();
             device.Set_Summ1Enabled(false);   //Установка параметра Summ1. (Нихрена не понятно для чего, но когда отключен сумма считается - количество товара * чек.

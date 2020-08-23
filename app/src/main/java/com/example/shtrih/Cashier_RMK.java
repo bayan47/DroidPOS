@@ -1,10 +1,8 @@
 package com.example.shtrih;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +12,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Cashier_RMK extends AppCompatActivity {
 
@@ -24,7 +21,15 @@ public class Cashier_RMK extends AppCompatActivity {
         setContentView(R.layout.activity_cashier__r_m_k);
 
 
-        final ArrayList<Good> list_for_sell = (ArrayList<Good>) getIntent().getSerializableExtra("goods_to_sell_list");
+        final ArrayList<Good> list_for_sell = Kassa.goods_to_sell_list;
+
+        float final_sum = 0;
+
+        for (Good good:list_for_sell)
+        {
+            final_sum += (good.count*good.price/100);
+        }
+
 
 
         final Intent goto_free_sell = new Intent(this,Kassa_SellUI.class);
@@ -35,6 +40,9 @@ public class Cashier_RMK extends AppCompatActivity {
 
         final ListView sellgoods_storage = (ListView) findViewById(R.id.selling_goods_list);
         Button sell_button = (Button) findViewById(R.id.sell_button);
+
+
+        sell_button.setText(list_for_sell.size()>0?"К оплате: "+ String.valueOf(final_sum)+ " Р":"К оплате: 0,00 Р");
 
         Button good_add_sell_list = (Button) findViewById(R.id.good_add_sell_list_button);
         Button free_sell_button = (Button) findViewById(R.id.good_free_price_sell);
@@ -87,6 +95,7 @@ public class Cashier_RMK extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.header_menu,menu);
+
         return true;
     }
 

@@ -5,12 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.shtrih.Good;
-import com.example.shtrih.Kassa;
-import com.example.shtrih.R;
 
 import java.util.List;
 
@@ -52,6 +47,8 @@ final public class GoodsListAdapted extends BaseAdapter {
             holder = new ViewHolder();
             holder.name_place = (TextView) convertView.findViewById(R.id.good_name_place);
             holder.price_place = (TextView) convertView.findViewById(R.id.good_price_place);
+            holder.count_place = (TextView) convertView.findViewById(R.id.good_count_place);
+            holder.sum_place = (TextView) convertView.findViewById(R.id.good_sum_place);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -60,6 +57,13 @@ final public class GoodsListAdapted extends BaseAdapter {
         Good good = this.goodData.get(position);
         holder.name_place.setText(good.name);
         holder.price_place.setText(String.valueOf(good.price/100)+" Р");
+
+        if (good.count>0)
+        {
+            holder.count_place.setText(good.count + "x");
+            holder.sum_place.setText(String.valueOf(good.count*good.price/100)+" Р");
+        }
+
         return convertView;
     }
 
@@ -67,5 +71,7 @@ final public class GoodsListAdapted extends BaseAdapter {
     static class ViewHolder {
         TextView price_place;
         TextView name_place;
+        TextView count_place;
+        TextView sum_place;
     }
 }

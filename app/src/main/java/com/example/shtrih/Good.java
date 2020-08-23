@@ -10,6 +10,7 @@ public class Good implements Serializable {
     public Kassa.TaxTypes nds;
     public int isFreePrice; // 0 - жесткая цена, 1 - мягкая цена
     public int id;
+    public float count=0;
 
     public Good()
     {
