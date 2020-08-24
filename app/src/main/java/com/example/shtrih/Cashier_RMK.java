@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -91,6 +89,7 @@ public class Cashier_RMK extends AppCompatActivity {
                     //toast.show();
                     UpdateText();
                     final_sum=0;
+                    Toast.makeText(getApplicationContext(),""+Kassa.device.Get_ResultCodeDescription(),Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

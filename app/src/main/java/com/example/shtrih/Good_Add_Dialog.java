@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -58,7 +57,7 @@ public class Good_Add_Dialog extends DialogFragment {
         count_good_text = (EditText) v.findViewById(R.id.count_good_text);
 
 
-        good_price_text.setText(price==0?"0.00":String.valueOf((price/100)));
+        good_price_text.setText(price==0?"0.00":String.valueOf((price/100.0)));
         count_good_text.setText("1.00");
 
 

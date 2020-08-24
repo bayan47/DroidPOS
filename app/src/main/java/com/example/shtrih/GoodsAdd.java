@@ -1,6 +1,7 @@
 package com.example.shtrih;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -94,7 +95,10 @@ public class GoodsAdd extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     good_for_add.name = goodname_place.getText().toString();
-                    good_for_add.price = (long) MultiApiHelper.roundFloat(Float.parseFloat(goodprice_place.getText().toString()),2)*100;
+                    float prepare_price = Float.parseFloat(goodprice_place.getText().toString());
+                    prepare_price = MultiApiHelper.roundFloat(prepare_price,2);
+                    prepare_price = prepare_price*100;
+                    good_for_add.price = (long) (prepare_price);
                     String sql_text = String.format("INSERT INTO goods (good_name,good_price,good_nds,good_pay_item_type,good_free_price) VALUES ('%s',%d,%d,%d,%d);",good_for_add.name,good_for_add.price,good_for_add.nds.nds_id,good_for_add.type.pay_item_type_id,free_price.isChecked()?1:0);
                     Toast toast = Toast.makeText(getApplicationContext(),"Товар добавлен",Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -110,12 +114,13 @@ public class GoodsAdd extends AppCompatActivity {
             nds_selector.setSelection(good_for_add.nds.nds_id);
             type_selector.setSelection(good_for_add.type.pay_item_type_id-1);
             goodname_place.setText(good_for_add.name);
-            goodprice_place.setText(String.valueOf(good_for_add.price/100));
+            goodprice_place.setText(String.valueOf(good_for_add.price/100.0));
             goodadd_button.setText("Обновить товар");
             free_price.setChecked(true);
 
             Button delete_good_button = new Button(this);
             delete_good_button.setText("Удалить товар");
+            delete_good_button.setBackgroundColor(Color.argb(0,0,0,0));
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.llayout);
             linearLayout.addView(delete_good_button);
 
@@ -140,9 +145,12 @@ public class GoodsAdd extends AppCompatActivity {
                 public void onClick(View view) {
 
                     good_for_add.name = goodname_place.getText().toString();
-                    good_for_add.price = (int) Math.round(Double.parseDouble(goodprice_place.getText().toString())*100);
+                    float prepare_price = Float.parseFloat(goodprice_place.getText().toString());
+                    prepare_price = MultiApiHelper.roundFloat(prepare_price,2);
+                    prepare_price = prepare_price*100;
+                    good_for_add.price = (long) (prepare_price);
 
-                    String sql_text = String.format("UPDATE goods SET good_name = '%s',good_price=%d,good_nds=%d,good_pay_item_type=%d,good_free_price=%d WHERE id=%d;",good_for_add.name,good_for_add.price,good_for_add.nds.nds_id,good_for_add.type.pay_item_type_id,good_for_add.id,free_price.isChecked()?1:0);
+                    String sql_text = String.format("UPDATE goods SET good_name = '%s',good_price=%d,good_nds=%d,good_pay_item_type=%d,good_free_price=%d WHERE id=%d;",good_for_add.name,good_for_add.price,good_for_add.nds.nds_id,good_for_add.type.pay_item_type_id,free_price.isChecked()?1:0,good_for_add.id);
                     DBHelper.DataBase.execSQL(sql_text);
                     Toast toast = Toast.makeText(getApplicationContext(),"Товар обновлен",Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);

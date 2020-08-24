@@ -8,7 +8,7 @@ android {
         applicationId 'com.example.ps'
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 1
+        versionCode 2
         versionName 'Cobalt'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

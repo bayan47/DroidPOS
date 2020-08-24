@@ -1,7 +1,6 @@
 package com.example.shtrih;
 
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -164,8 +163,10 @@ final public class Kassa  {
         device.Set_PaymentTypeSign(paymentType.pay_id); //Установка признака расчета
         device.Set_PaymentItemSign(paymentItemType.pay_item_type_id); //Установка признака предмета расчета
         device.FNOperation();
+
         device.FNCloseCheckEx();
     }
+
 
     public static void CashOperation2(ArrayList<Good> good_list)                   //Продажа
     {

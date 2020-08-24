@@ -56,12 +56,12 @@ final public class GoodsListAdapted extends BaseAdapter {
 
         Good good = this.goodData.get(position);
         holder.name_place.setText(good.name);
-        holder.price_place.setText((good.price/100) +" Р");
+        holder.price_place.setText((good.price/100.0) +" Р");
 
         if (good.count>0)
         {
             holder.count_place.setText(good.count + "x");
-            holder.sum_place.setText(MultiApiHelper.roundFloat(good.count*(good.price/100),2)+" Р");
+            holder.sum_place.setText(MultiApiHelper.roundFloat(good.count*(good.price/100.0F),2)+" Р");
         }
 
         return convertView;
