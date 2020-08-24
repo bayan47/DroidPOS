@@ -37,7 +37,7 @@ public class Kassa_SellUI extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Kassa.goodName = good_name.getText().toString();
-                Kassa.quantity = Double.parseDouble(good_quantity.getText().toString());
+                Kassa.quantity = Float.parseFloat(good_quantity.getText().toString());
                 Kassa.price = Kassa.ParsePrice(good_price.getText().toString());
                 Kassa.CashOperation();
             }

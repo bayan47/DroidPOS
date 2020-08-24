@@ -11,6 +11,7 @@
         android:id="@+id/kassasettings_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
         android:text="Кассовое устройство"
         tools:layout_editor_absoluteX="156dp"
         tools:layout_editor_absoluteY="654dp" />
@@ -62,15 +63,17 @@
         android:id="@+id/connect_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Подключить"
-        android:onClick="Connect_Button"/>
+        android:background="#00FFFFFF"
+        android:onClick="Connect_Button"
+        android:text="Подключить" />
 
     <Button
         android:id="@+id/disconnect_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Отключить"
-        android:onClick="Disconnect_Button"/>
+        android:background="#00FFFFFF"
+        android:onClick="Disconnect_Button"
+        android:text="Отключить" />
 
 
 </LinearLayout>

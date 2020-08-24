@@ -11,6 +11,7 @@
         android:id="@+id/opensession_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
         android:text="Открыть смену"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="33dp" />
@@ -19,6 +20,7 @@
         android:id="@+id/xprint_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
         android:text="Печать X-отчета"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="33dp" />
@@ -27,6 +29,7 @@
         android:id="@+id/closesession_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
         android:text="Закрыть смену"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="33dp" />
@@ -35,12 +38,14 @@
         android:id="@+id/check_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
         android:text="Кассовые операции" />
 
     <Button
         android:id="@+id/goods_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
         android:text="Добавить товар" />
 
     <TextView

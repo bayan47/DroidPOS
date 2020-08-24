@@ -7,13 +7,22 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Cashier_RMK extends AppCompatActivity {
+
+    Button sell_button;
+    float final_sum;
+    ArrayList<Good> list_for_sell=null;
+    Cashier_RMK chto = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +30,15 @@ public class Cashier_RMK extends AppCompatActivity {
         setContentView(R.layout.activity_cashier__r_m_k);
 
 
-        final ArrayList<Good> list_for_sell = Kassa.goods_to_sell_list;
+        list_for_sell = Kassa.goods_to_sell_list;
 
-        float final_sum = 0;
-
+        final_sum = 0;
+        DecimalFormat df = new DecimalFormat("###.##");
         for (Good good:list_for_sell)
         {
-            final_sum += (good.count*good.price/100);
+            float f = (good.count*good.price)/100;
+            final_sum = final_sum + MultiApiHelper.roundFloat(f,2);
+
         }
 
 
@@ -39,7 +50,7 @@ public class Cashier_RMK extends AppCompatActivity {
         final GoodsListAdapted adapter;
 
         final ListView sellgoods_storage = (ListView) findViewById(R.id.selling_goods_list);
-        Button sell_button = (Button) findViewById(R.id.sell_button);
+        sell_button = (Button) findViewById(R.id.sell_button);
 
 
         sell_button.setText(list_for_sell.size()>0?"К оплате: "+ String.valueOf(final_sum)+ " Р":"К оплате: 0,00 Р");
@@ -53,7 +64,7 @@ public class Cashier_RMK extends AppCompatActivity {
             sellgoods_storage.setAdapter(adapter);
             }
 
-        View.OnClickListener good_add_listener = new View.OnClickListener() {
+        final View.OnClickListener good_add_listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(goto_goods_list);
@@ -74,9 +85,12 @@ public class Cashier_RMK extends AppCompatActivity {
                     Kassa.CashOperation2(list_for_sell);
                     list_for_sell.clear();
                     sellgoods_storage.invalidateViews();
-                    Toast toast =  Toast.makeText(getApplicationContext(),"Операция выполнена",Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER,0,0);
-                    toast.show();
+                    //Toast toast =  Toast.makeText(getApplicationContext(),Kassa.device.Get_ResultCodeDescription(),Toast.LENGTH_SHORT);
+                    //Toast toast =  Toast.makeText(getApplicationContext(),Kassa.device.Get_Price()+"|"+Kassa.device.Get_Quantity()+"|"+Kassa.device.Get_Summ1() ,Toast.LENGTH_SHORT);
+                    //toast.setGravity(Gravity.CENTER,0,0);
+                    //toast.show();
+                    UpdateText();
+                    final_sum=0;
                 }
                 else
                 {
@@ -86,6 +100,20 @@ public class Cashier_RMK extends AppCompatActivity {
                 }
             }
         };
+
+        sellgoods_storage.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Good_Remove_Dialog good_remove_dialog = new Good_Remove_Dialog();
+                good_remove_dialog.good = (Good) adapterView.getItemAtPosition(i);
+                good_remove_dialog.adapted = (GoodsListAdapted) sellgoods_storage.getAdapter();
+                good_remove_dialog.list_good = list_for_sell;
+                good_remove_dialog.activity = Cashier_RMK.this;
+                good_remove_dialog.show(getSupportFragmentManager(),"good_remove");
+                return true;
+            }
+        });
+
 
         good_add_sell_list.setOnClickListener(good_add_listener);
         free_sell_button.setOnClickListener(free_sell_listener);
@@ -111,5 +139,12 @@ public class Cashier_RMK extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void UpdateText()
+    {
+        sell_button.setText(list_for_sell.size()>0?"К оплате: "+ String.valueOf(final_sum)+ " Р":"К оплате: 0,00 Р");
+    }
+
+
 
 }

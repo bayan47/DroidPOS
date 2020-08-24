@@ -97,7 +97,8 @@
             <Button
                 android:id="@+id/add_goods"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF" />
         </LinearLayout>
     </ScrollView>
 

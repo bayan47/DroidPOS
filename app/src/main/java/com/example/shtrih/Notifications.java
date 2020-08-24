@@ -18,6 +18,7 @@ final public class Notifications {
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle("ПриборКасса")
+
                         .setContentText(message);
 
         Notification notification = builder.build();

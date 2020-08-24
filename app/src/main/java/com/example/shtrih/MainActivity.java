@@ -132,10 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void MakeToast(Context context)
-    {
-        Toast.makeText(context,"herewego",Toast.LENGTH_LONG).show();
-    }
+
 
 
     public void Disconnect_Button(View view)

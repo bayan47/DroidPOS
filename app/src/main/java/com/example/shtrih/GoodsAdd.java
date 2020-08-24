@@ -94,7 +94,7 @@ public class GoodsAdd extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     good_for_add.name = goodname_place.getText().toString();
-                    good_for_add.price = (int) Math.round(Double.parseDouble(goodprice_place.getText().toString())*100);
+                    good_for_add.price = (long) MultiApiHelper.roundFloat(Float.parseFloat(goodprice_place.getText().toString()),2)*100;
                     String sql_text = String.format("INSERT INTO goods (good_name,good_price,good_nds,good_pay_item_type,good_free_price) VALUES ('%s',%d,%d,%d,%d);",good_for_add.name,good_for_add.price,good_for_add.nds.nds_id,good_for_add.type.pay_item_type_id,free_price.isChecked()?1:0);
                     Toast toast = Toast.makeText(getApplicationContext(),"Товар добавлен",Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);

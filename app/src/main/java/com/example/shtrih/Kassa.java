@@ -1,6 +1,10 @@
 package com.example.shtrih;
 
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -99,7 +103,7 @@ final public class Kassa  {
 
     public static String goodName; //Название товара
     public static long price; //Цена товара
-    public static double quantity; // Количество товара
+    public static float quantity; // Количество товара
     public static TaxTypes taxType; //Тип НДС
     public static PaymentTypes paymentType; //Признак способа расчета
     public static PaymentItemType paymentItemType; //Признак предмета расчета
@@ -144,7 +148,6 @@ final public class Kassa  {
     public static void FrDisconnect()   // Отключить кассу
     {
         Kassa.device.Disconnect();
-        int answer = Kassa.device.Connect();
     }
 
     public static void CashOperation()                   //Продажа
@@ -173,9 +176,13 @@ final public class Kassa  {
             device.Set_CheckType(CashOperationType.Prihod.cash_operation_type_id);           //Устанавливаю тип операции. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1ga8c8729c0e051e112febacd4f7f9ee91d
             device.Set_Price(good.price);
             device.Set_StringForPrinting(good.name);
+
             device.Set_Quantity(quantity);           //Установка количества товара к продаже
             device.Set_TaxValue1Enabled(false);      //Установка самостоятельного расчета суммы налога. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1gab43c70068f2161777d97b26b7b586c52
-            Summ1 = Summ1+ device.Get_Price()*Double.valueOf(device.Get_Quantity()).longValue();
+
+
+            Summ1 = Summ1 + (long)(good.price*quantity);
+
             device.Set_Summ1Enabled(false);   //Установка параметра Summ1. (Нихрена не понятно для чего, но когда отключен сумма считается - количество товара * чек.
             device.Set_Tax1(good.nds.nds_id);        //Установка выбранного НДС
             device.Set_Department(1);         //Установка режима свободной продажи - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1ga25e8f3455a02458e60cbd624000c751b
@@ -193,6 +200,26 @@ final public class Kassa  {
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         double input_price = bd.doubleValue()*100;
         return Double.valueOf(input_price).longValue();
+    }
+
+    public static void AutoConnect()
+    {
+        SQLiteDatabase db = DBHelper.DataBase;
+        Cursor query = db.rawQuery("SELECT * FROM conn_settings;", null);
+
+        String ipaddress;
+        int port;
+        int timeout;
+
+        if(query.moveToFirst())
+        {
+            ipaddress = query.getString(1);
+            port = query.getInt(2);
+            timeout = query.getInt(3);
+            Kassa.FrConnect(ipaddress, port, timeout);
+            int ans = Kassa.device.Connect();
+            Kassa.device.Beep();
+        }
     }
 
 }

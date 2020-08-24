@@ -49,6 +49,7 @@
         android:id="@+id/AddCashier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
         android:text="Сохранить" />
 
 </LinearLayout>

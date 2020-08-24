@@ -188,13 +188,9 @@ public class Cashier_NumPad_Fragment extends Fragment {
                 {
                     if (pass_text.getText().toString().equals(Selected_Cashier.selected_cashier_pass))
                     {
-                        Toast.makeText(getContext(),"Доступ получен для"+Selected_Cashier.selected_cashier.name, Toast.LENGTH_SHORT).show();
+                        //Kassa.AutoConnect();
                         startActivity(goto_cashierRMK);
-                        MainActivity mainActivity = new MainActivity();
-                        mainActivity.MakeToast(getContext());
-                        mainActivity = null;
-                        System.gc();
-                        Notifications.MakeNotification(getContext(),mainActivity==null?"удален":"не удален");
+
                     }
                     else
                     {

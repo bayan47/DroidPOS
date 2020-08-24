@@ -26,6 +26,7 @@ public class Cashier_Logon extends AppCompatActivity {
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getSupportActionBar().hide();
+        MultiApiHelper.current_context = this;
         MultiApiHelper.Package_name = getPackageName();
         MultiApiHelper.RunOnStartup();
 
@@ -89,6 +90,7 @@ public class Cashier_Logon extends AppCompatActivity {
             }
             while (query.moveToNext());
         }
+
 
 
         ArrayAdapter<Cashier> cashiers_list_adapter = new ArrayAdapter<Cashier>(this,android.R.layout.simple_list_item_1,cashiers);
