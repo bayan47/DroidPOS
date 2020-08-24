@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Kassa_SellUI extends AppCompatActivity {
 
@@ -40,6 +41,7 @@ public class Kassa_SellUI extends AppCompatActivity {
                 Kassa.quantity = Float.parseFloat(good_quantity.getText().toString());
                 Kassa.price = Kassa.ParsePrice(good_price.getText().toString());
                 Kassa.CashOperation();
+                Toast.makeText(Kassa_SellUI.this,Kassa.device.Get_ResultCodeDescription(),Toast.LENGTH_SHORT).show();
             }
         };
 

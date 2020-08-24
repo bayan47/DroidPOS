@@ -156,7 +156,7 @@ final public class Kassa  {
         device.Set_StringForPrinting(goodName);
         device.Set_Quantity(quantity);           //Установка количества товара к продаже
         device.Set_TaxValue1Enabled(false);      //Установка самостоятельного расчета суммы налога. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1gab43c70068f2161777d97b26b7b586c52
-        device.Set_Summ1(device.Get_Price()*Double.valueOf(device.Get_Quantity()).longValue());
+        device.Set_Summ1( (long)(MultiApiHelper.roundFloat(price*quantity,0) ));
         device.Set_Summ1Enabled(false);   //Установка параметра Summ1. (Нихрена не понятно для чего, но когда отключен сумма считается - количество товара * чек.
         device.Set_Tax1(taxType.nds_id);        //Установка выбранного НДС
         device.Set_Department(1);         //Установка режима свободной продажи - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1ga25e8f3455a02458e60cbd624000c751b
@@ -182,7 +182,7 @@ final public class Kassa  {
             device.Set_TaxValue1Enabled(false);      //Установка самостоятельного расчета суммы налога. Подробнее - https://github.com/shtrih-m/fr_drv_ng/wiki/Properties#group___properties_1gab43c70068f2161777d97b26b7b586c52
 
 
-            Summ1 = Summ1 + (long)(good.price*quantity);
+            Summ1 = Summ1 + (long)(MultiApiHelper.roundFloat(good.price*quantity,0));
 
             device.Set_Summ1Enabled(false);   //Установка параметра Summ1. (Нихрена не понятно для чего, но когда отключен сумма считается - количество товара * чек.
             device.Set_Tax1(good.nds.nds_id);        //Установка выбранного НДС
