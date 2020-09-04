@@ -35,7 +35,6 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
     implementation files('android_util_fr_drv_ng-release.aar')
     implementation files('libs\\classic_java_fr_drv_ng-1.4.4.jar')
     testImplementation 'junit:junit:4.12'

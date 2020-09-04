@@ -2,7 +2,6 @@ package com.example.shtrih;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,12 +14,11 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class Cashier_RMK extends AppCompatActivity {
+public class Cashier_RMK extends MenuSupportActivity {
 
     Button sell_button;
     float final_sum;
     ArrayList<Good> list_for_sell=null;
-    Cashier_RMK chto = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

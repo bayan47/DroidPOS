@@ -2,8 +2,10 @@ package com.example.shtrih;
 
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.widget.Toast;
 
 
 import static android.content.Context.MODE_PRIVATE;
@@ -16,11 +18,17 @@ final public class DBHelper {
     public static void OpenOrCreateDB(Context context)
     {
 
-        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.LOLLIPOP){
-            DataBase = SQLiteDatabase.openOrCreateDatabase(Environment.getExternalStorageDirectory() +("/ps34.db"),null);
-        } else{
-            DataBase = SQLiteDatabase.openOrCreateDatabase(context.getDatabasePath("ps34.db") ,null);
+        try {
+            DataBase = SQLiteDatabase.openOrCreateDatabase(context.getDatabasePath("ps34.db"), null);
         }
+        catch (SQLException sql)
+        {
+
+        }
+        finally {
+            DataBase = SQLiteDatabase.openOrCreateDatabase(Environment.getExternalStorageDirectory() +("/ps34.db"),null);
+        }
+ 
 
     }
 

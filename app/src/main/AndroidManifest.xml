@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.shtrih">
+    package="com.example.shtrih" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -19,20 +19,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="landscape"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Cashier_Logon">
+        android:theme="@style/AppTheme" >
+
+        <activity android:name=".Cashier_Logon"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".Cashier_RMK" />
-        <activity android:name=".GoodsAdd" />
-        <activity android:name=".GoodsList" />
-        <activity android:name=".Kassa_SellUI" />
-        <activity android:name=".Kassa_Settings" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".Cashier_RMK"
+          />
+        <activity android:name=".GoodsAdd"
+            />
+        <activity android:name=".GoodsList"
+           />
+        <activity android:name=".Kassa_SellUI"
+         />
+        <activity android:name=".Kassa_Settings"
+        />
+        <activity android:name=".MainActivity"
+         />
     </application>
 
 </manifest>

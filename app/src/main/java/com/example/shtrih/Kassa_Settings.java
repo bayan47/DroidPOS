@@ -1,13 +1,11 @@
 package com.example.shtrih;
 
-import android.support.v7.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Kassa_Settings extends AppCompatActivity {
+public class Kassa_Settings extends MenuSupportActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

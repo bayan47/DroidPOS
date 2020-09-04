@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="25dp"
-    android:paddingBottom="25dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,29 +17,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5px"
-            android:layout_marginTop="15px"
-            android:layout_marginBottom="15px"
+            android:layout_marginTop="5px"
+            android:layout_marginBottom="5px"
             android:layout_weight="5"
-            android:textSize="35dp" />
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/good_count_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5px"
-            android:layout_marginTop="15px"
-            android:layout_marginBottom="15px"
-            android:textSize="35dp" />
+            android:layout_marginTop="5px"
+            android:layout_marginBottom="5px"
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/good_price_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5px"
-            android:layout_marginTop="15px"
-            android:layout_marginBottom="15px"
+            android:layout_marginTop="5px"
+            android:layout_marginBottom="5px"
             android:textAlignment="textEnd"
-            android:textSize="35dp" />
+            android:textSize="25dp" />
     </LinearLayout>
 
     <TextView
@@ -48,9 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="5px"
         android:layout_marginTop="15px"
-        android:layout_marginBottom="15px"
+        android:layout_marginBottom="5px"
         android:textAlignment="textEnd"
-        android:textColor="#78FD68"
-        android:textSize="35dp" />
+        android:textColor="#64EA54"
+        android:textSize="25dp" />
 
 </LinearLayout>
